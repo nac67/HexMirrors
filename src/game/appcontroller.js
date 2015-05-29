@@ -5,6 +5,23 @@ var AppController = function () {
     this.ratFilmPlayer.addFilmStrip("running", Content.getFilm('images/rat.png'));
     this.ratFilmPlayer.addFilmStrip("spazzing", Content.getFilm('images/Spazout.png'));
     this.carrotBmp = Content.getImage('images/carrot.png');
+
+    //var b = new Board();
+    //generateHexagonBoard(2);
+
+    // var a = new ExpandingArray();
+    // a.put(5,3, 8 )
+    // a.put(10,5, 8 )
+    // a.print()
+    // a.put(5,10, 8)
+    // a.put(-5, -3,  7)
+    // a.put(-2,15, 9)
+    // a.put(2,-8, 4)
+    // a.print()
+    // console.log(a.get(-5,-3) == 7)
+    // console.log(a.get(5,10) == 8)
+    // console.log(a.get(-2,15) == 9)
+    // console.log(a.get(2,-8) == 4)
 }
 
 AppController.prototype.update = function () {
