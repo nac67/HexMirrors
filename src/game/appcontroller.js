@@ -6,8 +6,8 @@ var AppController = function () {
     this.ratFilmPlayer.addFilmStrip("spazzing", Content.getFilm('images/Spazout.png'));
     this.carrotBmp = Content.getImage('images/carrot.png');
 
-    //var b = new Board();
-    //generateHexagonBoard(2);
+    var b = new Board();
+    generateHexagonBoard(2);
 
     // var a = new ExpandingArray();
     // a.put(5,3, 8 )

@@ -4,6 +4,7 @@ var Tile = function (cubePos) {
 
 // Cube coordinate system point
 var Cube = function(x,y,z) {
+    if(x + y + z != 0) alert("Cube inv broken");
     this.x = x;
     this.y = y;
     this.z = z;

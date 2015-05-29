@@ -14,21 +14,17 @@ ExpandingArray.prototype.put = function (row, col, item) {
 
 
     if (relRow >= numRows) {
-        console.log("rows >>")
         this._addRows(relRow - numRows + 1);
     }
     if (relCol >= numCols) {
-        console.log("cols >>")
         this._addCols(relCol - numCols + 1);
     }
     if (relRow < 0) {
-        console.log("rows <<")
         this._addRows(-relRow);
         this._shiftRows(-relRow);
         this.rowOffset += -relRow;
     }
     if (relCol < 0) {
-        console.log("cols <<")
         this._addCols(-relCol);
         this._shiftCols(-relCol);
         this.colOffset += -relCol;
