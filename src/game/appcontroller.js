@@ -7,7 +7,10 @@ var AppController = function () {
     this.carrotBmp = Content.getImage('images/carrot.png');
 
     this.board = new Board(GameTile);
-    this.board.getTileAt(new Cube(2,0,-2)).color = '#FF0000';
+    var t = this.board.getTileAt(new Cube(2,0,-2));
+    t.color = '#FF0000';
+    var s = this.board.getNeighborAt(t, 4);
+    s.color = '#00FF00';
 
     // var a = new ExpandingArray();
     // a.put(5,3, 8 )
@@ -46,6 +49,12 @@ AppController.prototype.update = function () {
     }
 
     this.ratFilmPlayer.updateFrame();
+
+    var t = this.board.getTileAtXY(Mouse.x, Mouse.y);
+    if (t !== null) {
+        t.color = '#888888'
+    }
+
 }
 
 AppController.prototype.draw = function () {
@@ -63,5 +72,5 @@ AppController.prototype.draw = function () {
     //   * fetching one from Content's cache
     context.drawImage(this.carrotBmp, 20, 20);
 
-    this.board.draw(context, 200,200, 20);
+    this.board.draw(context);
 }

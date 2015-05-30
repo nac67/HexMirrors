@@ -1,3 +1,13 @@
+// http://www.redblobgames.com/grids/hexagons/
+
+// Base class for a tile of a board
+// Tiles contain their cube position, although they 
+// are stored in axial position in the array
+//
+// This class can be overwritten to change the draw method etc.
+// Just make sure that when you call the board constructor, you are
+// putting in the new tile class as the argument
+
 var Tile = function (cubePos) {
     this.cubePos = cubePos.copy();
     this.color = '#0099DD';
@@ -60,6 +70,28 @@ Cube.prototype.addV = function(cube) {
     this.z += cube.z;
 }
 
+Cube.prototype.round = function() {
+    var rx = Math.round(this.x);
+    var ry = Math.round(this.y);
+    var rz = Math.round(this.z);
+
+    var xDiff = Math.abs(rx - this.x);
+    var yDiff = Math.abs(ry - this.y);
+    var zDiff = Math.abs(rz - this.z);
+
+    if (xDiff > yDiff && xDiff > zDiff) {
+        rx = -ry-rz;
+    } else if (yDiff > zDiff) {
+        ry = -rx-rz;
+    } else {
+        rz = -rx-ry;
+    }
+
+    this.x = rx;
+    this.y = ry;
+    this.z = rz;
+}
+
 Cube.prototype.copy = function() {
     return new Cube(this.x, this.y, this.z);
 }
@@ -87,6 +119,14 @@ Axial.prototype.add = function(q,r) {
 Axial.prototype.addV = function(axial) {
     this.q += axial.q;
     this.r += axial.r;
+}
+
+Axial.prototype.round = function () {
+    var c = axial2Cube(this);
+    c.round();
+    var a = cube2Axial(c);
+    this.q = a.q;
+    this.r = a.r;
 }
 
 Axial.prototype.copy = function() {
