@@ -1,5 +1,42 @@
 var Tile = function (cubePos) {
     this.cubePos = cubePos.copy();
+    this.color = '#0099DD';
+}
+
+// absolute position on screen to draw hex with radius
+Tile.prototype.drawRawHex = function(ctx, x, y, radius) {
+    var i, angle, tempX, tempY;
+
+    ctx.fillStyle = this.color;
+    ctx.strokeStyle = '#000000';
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+
+    for (i=0; i<=6; i++) {
+        angle = Math.PI/3 * i;
+        tempX = radius * Math.cos(angle) + x;
+        tempY = radius * Math.sin(angle) + y;
+        if (i == 0) {
+            ctx.moveTo(tempX, tempY);
+        } else {
+            ctx.lineTo(tempX, tempY);
+        }
+    }
+
+    ctx.closePath();
+    ctx.stroke();
+    ctx.fill();
+}
+
+// x and y are offsets of the original board,
+// hex position will be (x + xPixelPos, y + yPixelPos)
+Tile.prototype.draw = function(ctx, x, y, radius) {
+    // you should override this method with a subclass method
+    var tx = radius * 3/2 * this.cubePos.x;
+    var ty = radius * Math.sqrt(3) * (this.cubePos.z + this.cubePos.x/2);
+
+    // apply offset x,y and draw at position
+    this.drawRawHex(ctx, tx + x, ty + y, radius); 
 }
 
 // Cube coordinate system point
@@ -26,6 +63,15 @@ Cube.prototype.addV = function(cube) {
 Cube.prototype.copy = function() {
     return new Cube(this.x, this.y, this.z);
 }
+
+var CubeDirs = [
+    new Cube(1,-1,0),
+    new Cube(1,0,-1),
+    new Cube(0,1,-1),
+    new Cube(-1,1,0),
+    new Cube(-1,0,1),
+    new Cube(0,-1,1)
+    ]
 
 // Axial coordinate system point
 var Axial = function(q,r) {

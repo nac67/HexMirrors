@@ -6,8 +6,8 @@ var AppController = function () {
     this.ratFilmPlayer.addFilmStrip("spazzing", Content.getFilm('images/Spazout.png'));
     this.carrotBmp = Content.getImage('images/carrot.png');
 
-    var b = new Board();
-    generateHexagonBoard(2);
+    this.board = new Board(GameTile);
+    this.board.getTileAt(new Cube(2,0,-2)).color = '#FF0000';
 
     // var a = new ExpandingArray();
     // a.put(5,3, 8 )
@@ -62,4 +62,6 @@ AppController.prototype.draw = function () {
     //   * using one that was returned from loadImage
     //   * fetching one from Content's cache
     context.drawImage(this.carrotBmp, 20, 20);
+
+    this.board.draw(context, 200,200, 20);
 }
